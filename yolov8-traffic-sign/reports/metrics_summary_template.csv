@@ -1,0 +1,8 @@
+variant,mAP50,mAP50_95,precision,recall,params,notes
+baseline,,,,,,
+cbam,,,,,,
+lcfe,,,,,,
+lcfe_v2,,,,,,
+imcmd,,,,,,
+imcmd_ts,,,,,,
+ts,,,,,,

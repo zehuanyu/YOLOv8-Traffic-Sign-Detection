@@ -1,0 +1,15 @@
+# Update `path` for your local environment before training.
+path: lisa_yolo
+train: images/train
+val: images/val
+test: images/test
+
+nc: 7
+names:
+  0: go
+  1: goForward
+  2: goLeft
+  3: stop
+  4: stopLeft
+  5: warning
+  6: warningLeft

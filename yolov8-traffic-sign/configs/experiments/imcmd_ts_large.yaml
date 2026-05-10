@@ -1,0 +1,7 @@
+variant: imcmd_ts
+model_type: large
+data: configs/datasets/lisa_night.yaml
+epochs: 50
+batch: 16
+device: "0"
+name: imcmd_ts_large_50epochs

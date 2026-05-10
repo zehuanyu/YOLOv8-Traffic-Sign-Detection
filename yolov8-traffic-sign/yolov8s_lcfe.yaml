@@ -1,0 +1,47 @@
+# YOLOv8s + CCA_Light（轻量级上下文增强）
+# 基于YOLO-CCA思想，简化为：LCFE + SE + 残差连接
+# 去掉Transformer和GCFC，确保训练稳定
+
+# Parameters
+nc: 7  # 类别数
+scales:
+  # [depth, width, max_channels]
+  s: [0.33, 0.50, 1024]
+
+# YOLOv8s backbone
+backbone:
+  # [from, repeats, module, args]
+  - [-1, 1, Conv, [64, 3, 2]] # 0-P1/2
+  - [-1, 1, Conv, [128, 3, 2]] # 1-P2/4
+  - [-1, 3, C2f, [128, True]]
+  - [-1, 1, Conv, [256, 3, 2]] # 3-P3/8
+  - [-1, 6, C2f, [256, True]]
+  - [-1, 1, Conv, [512, 3, 2]] # 5-P4/16
+  - [-1, 6, C2f, [512, True]]
+  - [-1, 1, Conv, [1024, 3, 2]] # 7-P5/32
+  - [-1, 3, C2f, [1024, True]]
+  - [-1, 1, SPPF, [1024, 5]] # 9
+
+# YOLOv8s head with CCA_Light
+head:
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 6], 1, Concat, [1]] # cat backbone P4
+  - [-1, 3, C2f, [512]] # 12 → 实际输出256ch（width_multiple=0.5）
+  - [-1, 1, CCA_Light, [256]]  # 13 - 增强P4（实际256ch）
+
+  - [-1, 1, nn.Upsample, [None, 2, "nearest"]]
+  - [[-1, 4], 1, Concat, [1]] # cat backbone P3
+  - [-1, 3, C2f, [256]] # 16 → 实际输出128ch  
+  - [-1, 1, CCA_Light, [128]]  # 17 - 增强P3（实际128ch）
+
+  # 下采样分支
+  - [-1, 1, Conv, [256, 3, 2]]
+  - [[-1, 13], 1, Concat, [1]] # cat head P4
+  - [-1, 3, C2f, [512]] # 20 (P4/16-medium)
+
+  - [-1, 1, Conv, [512, 3, 2]]
+  - [[-1, 9], 1, Concat, [1]] # cat head P5
+  - [-1, 3, C2f, [1024]] # 23 (P5/32-large)
+
+  - [[17, 20, 23], 1, Detect, [nc]] # Detect(P3, P4, P5)
+

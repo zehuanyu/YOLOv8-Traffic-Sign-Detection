@@ -1,0 +1,12 @@
+names:
+- go
+- goForward
+- goLeft
+- stop
+- stopLeft
+- warning
+- warningLeft
+nc: 7
+path: C:\Users\dicky\OneDrive\2025Fall\CV\Project\lisa_yolo_redistributed
+train: C:\Users\dicky\OneDrive\2025Fall\CV\Project\lisa_yolo_redistributed\images\train
+val: C:\Users\dicky\OneDrive\2025Fall\CV\Project\lisa_yolo_redistributed\images\val_night

@@ -1,0 +1,8 @@
+variant: baseline
+data: configs/datasets/lisa_day.yaml
+model_size: s
+epochs: 100
+batch: 16
+imgsz: 640
+project: runs/traffic_sign
+name: yolov8_lisa_baseline

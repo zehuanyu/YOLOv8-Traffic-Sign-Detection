@@ -1,0 +1,5 @@
+model,day_map50,night_map50,gap,relative_drop_pct
+Baseline,45.62,39.09,6.53,14.3
+IMCMD,45.35,40.09,5.26,11.6
+IMCMD-TS,44.33,39.47,4.86,11.0
+YOLO-TS,42.58,36.28,6.30,14.8

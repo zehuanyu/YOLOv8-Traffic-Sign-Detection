@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "yolo-traffic-sign"
+version = "0.1.0"
+description = "A GitHub-ready YOLOv8 traffic sign detection project with custom CV modules."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { file = "LICENSE" }
+authors = [
+  { name = "Joyce and collaborators" }
+]
+keywords = ["computer-vision", "yolo", "traffic-sign", "object-detection", "ultralytics"]
+dependencies = [
+  "ultralytics>=8.2.0",
+  "pyyaml>=6.0",
+  "pandas>=2.0",
+  "matplotlib>=3.8"
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8.0",
+  "ruff>=0.6.0"
+]
+
+[project.scripts]
+yts = "yolo_traffic_sign.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

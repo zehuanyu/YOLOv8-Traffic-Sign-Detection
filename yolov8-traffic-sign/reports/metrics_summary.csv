@@ -1,0 +1,7 @@
+model,map50,params_millions,notes
+IMCMD,42.74,1.98,Best overall accuracy
+IMCMD-TS,40.57,2.21,Strong multi-scale fusion variant
+YOLOv8s Baseline,39.14,11.14,Reference model
+YOLO-TS,38.10,13.71,Ablation comparison
+CCA_Light,29.91,,Lightweight context baseline
+CBAM,11.73,,Attention-only comparison
